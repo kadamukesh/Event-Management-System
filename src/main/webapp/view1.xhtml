@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <title>Admin Student Registration</title>
+    <link rel="stylesheet" href="adminhome0.css" />
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+ 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" nomodule="nomodule"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #eaeaea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #333;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            transition: color 0.2s ease, transform 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        h2:hover {
+            color: #3498db;
+            transform: scale(1.1);
+        }
+
+        .ui-datatable {
+            width: 90%;
+            border-collapse: collapse;
+            background-color: #f4f6f8; /* Table background color */
+            border-radius: 0.8rem;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease;
+        }
+
+        .ui-datatable:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.02);
+        }
+
+        .ui-datatable th, 
+        .ui-datatable td {
+            border: 1px solid #e0e0e0;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .ui-datatable thead th {
+            background-color: #3498db;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            padding: 1.2rem;
+        }
+
+        .ui-datatable tbody tr:nth-child(even) {
+            background-color: #ffffff; /* Alternating row color */
+        }
+
+        .ui-datatable tbody tr:nth-child(odd) {
+            background-color: #f9f9f9; /* Alternating row color */
+        }
+
+        .ui-datatable tbody tr:hover {
+            background-color: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .ui-datatable td img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 5px;
+        }
+
+        .ui-datatable td img:hover {
+            transform: scale(1.4); /* Reduced scale for hover effect */
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            padding: 8px; /* Adjusted padding on hover */
+        }
+
+        .ui-datatable .action-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .ui-datatable .action-links i {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #3498db;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .ui-datatable .action-links i:hover {
+            color: #2980b9;
+            transform: scale(1.2);
+        }
+
+ 
+    </style>
+</h:head>
+
+<h:body>
+    <input type="checkbox" id="menu-toggle" />
+    <div class="sidebar">
+        <div class="side-header">
+            <h3>A<span>dmin</span></h3>
+        </div>
+
+        <div class="side-content">
+            <div class="profile">
+                <div class="profile-img bg-img" style="background-image: url(images/Admin-icon.png)"></div>
+                <h4>Klu</h4>
+                <small>Admin</small>
+            </div>
+
+            <div class="side-menu">
+                <ul>
+                    <li style="margin-top: 40px;">
+                        <a href="admindash.jsp" class="active">
+                            <span class="las la-home"></span>
+                            <small>Dashboard</small>
+                        </a>
+                    </li>
+                    <li style="margin-top: 40px;">
+                        <a href="facultyreg.jsf">
+                            <span class="las la-user-secret"></span>
+                            <small>Faculty</small>
+                        </a>
+                    </li>
+                    <li style="margin-top: 40px;">
+                        <a href="studentreg.jsf">
+                            <span class="las la-user-graduate"></span>
+                            <small>Student</small>
+                        </a>
+                    </li>
+                    <li style="margin-top: 40px;">
+                        <a href="viewall.jsp">
+                            <span class="las la-eye"></span>
+                            <small>View</small>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="header-content">
+                <label for="menu-toggle">
+                    <span class="las la-bars"></span>
+                </label>
+                <div class="header-menu">
+                    <div class="notify-icon"></div>
+                    <div class="notify-icon">
+                        <span class="las la-bell"></span>
+                        <span class="notify">3</span>
+                    </div>
+                    <div class="user">
+                        <div class="bg-img" style="background-image: url(images/Admin-icon.png)"></div>
+                        <span class="las la-power-off"></span>
+                         <a href="adminlogout.jsp">
+                        <span style="color: #22BAA0; font-size: 15px; font-weight: bold;">Logout</span></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="page-header" id="analytics">
+                <h2>View All Students</h2><br></br>
+                <small>Home / View Student</small>
+            </div>
+
+            <div class="page-content">
+                <div class="form-container" style=" padding: 20px; border-radius: 10px;  height: 130vh; background-color: #fff0f5;
+                
+                
+                 ">
+                    <div class="form-content" style="width: 100%; max-width: 600px;">
+                    
+    
+
+          <h:dataTable value="#{sbean.stdlist}" var="std" styleClass="ui-datatable">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{std.sid}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{std.susername}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Gender</f:facet>
+                #{std.sgender}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Department</f:facet>
+                #{std.sdepartment}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Email</f:facet>
+                #{std.semail}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Contact</f:facet>
+                #{std.scontact}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Image</f:facet>
+                <h:graphicImage value="/ImageServlet1?id=#{std.sid}" alt="Student Image" style="width:100px"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <h:panelGroup styleClass="action-links">
+                    <h:form>
+                       <a href="supdate.jsf">
+                            <i class="fa-solid fa-edit"></i>
+                       </a>
+                    </h:form>
+                    <h:form>
+                        <h:commandLink action="#{sbean.delete(std.sid)}">
+                            <i class="fa-solid fa-trash"></i>
+                        </h:commandLink>
+                    </h:form>
+                </h:panelGroup>
+            </h:column>
+        </h:dataTable>
+  
+                        
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</h:body>
+</html>

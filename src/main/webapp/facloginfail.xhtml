@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+    <style>
+        body {
+            text-align: center; /* Center align content */
+            background-color: #f0f0f0; /* Light gray background */
+            font-family: Arial, sans-serif; /* Set a common font family */
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .message-box {
+            background-color: #ffffff; /* White background for message box */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+            text-align: center;
+            animation: slide-up 0.5s ease; /* Animation */
+        }
+        .button-wrapper {
+            margin-top: 20px; /* Adjust margin for button */
+        }
+        @keyframes slide-up {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color */
+            color: #ffffff; /* White text color */
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</h:head> 
+
+<body> 
+    <div class="container">
+        <div class="message-box">
+            <h3 style="color: #dc3545;">Login Failed</h3>
+            <p>Please check your credentials and try again.</p>
+            <div class="button-wrapper">
+                <a href="facultylogin.jsf" class="btn">Back</a>
+            </div>
+        </div>
+    </div>
+</body> 
+</html>

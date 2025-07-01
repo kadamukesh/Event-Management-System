@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Faculty Dashboard</title>
+    <link rel="stylesheet" href="facstyle.css"/>
+
+    <style>
+        .swiper {
+            width: 950px;
+        }
+
+        .container {
+            border-radius: 20px;
+        }
+
+        .card .image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+        }
+
+        .card .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #000;
+        }
+
+        .card {
+            position: relative;
+            background: #000;
+            border: 3px solid #0ef;
+            border-radius: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #98FF98;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #0ef;
+            clip-path: circle(55% at 0 0);
+            border-top-left-radius: 10px;
+            transition: clip-path 0.3s;
+        }
+
+        .card:hover::before {
+            clip-path: circle(75% at 0 0);
+        }
+
+        .card .card-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .card .social-media {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card .social-media i {
+            color: #fff;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .card .social-media i:hover {
+            color: #000;
+        }
+
+        .card .name-profession {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .name-profession .name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .name-profession .profession {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .card .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .card .rating i {
+            font-size: 18px;
+            color: #0ef;
+            margin: 0 2px;
+        }
+
+        .card .button {
+            display: flex;
+            justify-content: space-around;
+            width: 110%;
+            margin-top: 20px;
+        }
+
+        .card .button button {
+            background: #0ef;
+            border: none;
+            outline: none;
+            color: #000;
+            font-weight: 600;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .card .button button:hover {
+            background: #fff;
+        }
+
+        .swiper-pagination-bullet {
+            height: 7px;
+            width: 26px;
+            background: #0ef;
+            border-radius: 25px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #0ef;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .add-event-btn {
+    width: 92%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #0ef;
+    color: black;
+    height:2%;
+    padding: 10px;
+}
+     
+      .feedback-form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .feedback-form:hover {
+            box-shadow: 0 0 15px rgba(14, 239, 255, 0.8);
+        }
+
+        .feedback-form h2 {
+            text-align: center;
+            color: #0ef;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #0ef;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .feedback-form input[type="text"],
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #0ef;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #0ef;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feedback-form input[type="text"]:focus,
+        .feedback-form textarea:focus {
+            border-color: #00aaff;
+            background-color: #555;
+            color: #fff;
+            outline: none;
+        }
+
+        .feedback-form textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .feedback-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0ef;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .feedback-form button:hover {
+            background-color: #00aaff;
+            transform: scale(1.05);
+        }
+         .placeholder-button {
+        position: relative;
+        background-color: #0ef;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .placeholder-button:hover {
+        background-color: #003366;
+        transform: scale(1.05);
+    }
+
+    .placeholder-button::before {
+        content: 'Submit';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-size: 16px;
+        pointer-events: none;
+    }   
+    </style>
+</h:head>
+
+<h:body>
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="sidebar">
+                <div class="logo">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="./images/person-check.svg" alt="logo" class="logo-img mr-3"/>
+                        <div class="logo-text">Faculty Module</div>
+                    </div>
+                </div>
+                <div class="user-info d-flex">
+                    <div>
+                        <img src="./images/man.svg" alt="user-img" class="user-img"/>
+                    </div>
+                    <div class="d-flex flex-column">
+                        
+                    </div>
+                </div>
+                <ul class="nav flex-column menu-link">
+                
+    <li class="nav-item" style="margin-top: 50px;">
+                        <a href="fachome0.jsp" class="nav-link">
+                            <img src="./images/calendar-event.svg" alt="orders"/>Event Resources
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-top: 50px;">
+                        <a href="vieweventsregisteredstudents.jsf" class="nav-link">
+                            <img src="./images/clipboard-data.svg" alt="dashboard"/>Events Participation List
+                        </a>
+                    </li>
+                    
+                      <li class="nav-item" style="margin-top: 50px;">
+                        <a href="uploadcertificate.jsf" class="nav-link">
+                            <img src="./images/cloud-upload.svg" alt="dashboard"/>Upload Certificate
+                        </a>
+                    </li>
+                      <li class="nav-item" style="margin-top: 50px;">
+                        <a href="viewfeedback.jsf" class="nav-link">
+                            <img src="./images/eye.svg" alt="dashboard"/>View Feedback
+                        </a>
+                    </li>
+                  
+               
+              
+                 
+                    <li class="nav-item" style="margin-top: 50px;">
+                        <a href="facdash.jsp" class="nav-link">
+                            <img src="./images/person-square.svg" alt="settings"/>View Profile
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="top-bar d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <img src="./images/menu.svg" alt="menu" class="menu-toggle"/>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                    </div>
+                </div>
+
+                <div class="inner-section">
+                    <h2 class="page-title" style="
+  position: relative; /* Position relative for transform animations */
+  display: inline-block; /* Ensures proper handling of transform */
+  color: #0ef; /* Initial text color */
+  transition: color 0.3s ease, transform 0.6s ease; /* Smooth transitions for color and movement */
+  cursor: pointer; /* Change cursor to pointer for better UX */
+" onmouseover="this.style.color='#003366'; this.style.transform='translateY(10px)';" onmouseout="this.style.color='#003366'; this.style.transform='translateY(0)';">
+                        Event Registration
+                    </h2>
+
+                    <hr style="border: 1px solid #0ef; "/>
+ <div class="form-container" style=" padding: 20px; border-radius: 10px;  display: flex; justify-content: center; align-items: center; height: 70vh;margin-top: 130px;">
+                    <div class="form-content" style="width: 100%; max-width: 600px;">
+                    <h:form enctype="multipart/form-data">
+                        <div style="margin-bottom: 15px;margin-top: 40px;">
+                            <h:outputLabel for="id" value="Event Id" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+                            <h:inputText id="id" required="true" requiredMessage="Enter Event Id" value="#{eventbean.id}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;"/>
+                            <h:message for="id" style="color: red; font-size: 12px;"/>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h:outputLabel for="name" value="Event Name" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+                            <h:inputText id="name" required="true" requiredMessage="Enter Name" value="#{eventbean.name}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;"/>
+                            <h:message for="name" style="color: red; font-size: 12px;"/>
+                        </div>
+                        
+                           <div style="margin-bottom: 15px;">
+                            <h:outputLabel for="description" value="Event  Description" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+                            <h:inputTextarea id="description" required="true" requiredMessage="Enter Description" value="#{eventbean.description}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;"/>
+                            <h:message for="description" style="color: red; font-size: 12px;"/>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h:outputLabel for="venue" value="Event Venue" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+                            <h:inputText id="venue" required="true" requiredMessage="Enter Venue" value="#{eventbean.venu}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;"/>
+                            <h:message for="venue" style="color: red; font-size: 12px;"/>
+                        </div>
+                <div style="margin-bottom: 15px;">           
+<h:outputLabel for="startDate" value="Event Start Date" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+            <h:inputText id="startDate" required="true" requiredMessage="Enter Start Date" value="#{eventbean.startDate}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;">
+                <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm" />
+                <f:passThroughAttribute name="type" value="datetime-local" />
+            </h:inputText>
+            <h:message for="startDate" style="color: red; font-size: 12px;"/>
+
+</div>
+
+
+   <div style="margin-bottom: 15px;">
+                  <h:outputLabel for="EndDate" value="Event End Date" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+            <h:inputText id="EndDate" required="true" requiredMessage="Enter Start Date" value="#{eventbean.endDate}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;">
+                <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm" />
+                <f:passThroughAttribute name="type" value="datetime-local" />
+            </h:inputText>
+            <h:message for="EndDate" style="color: red; font-size: 12px;"/>
+            
+            </div>
+               <div style="margin-bottom: 15px;">
+               
+                    <h:outputLabel for="regdead" value="Event Registration Deadline" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+            <h:inputText id="regdead" required="true" requiredMessage="Enter Event Reg. Deadline" value="#{eventbean.registrationDeadline}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;">
+                <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm" />
+                <f:passThroughAttribute name="type" value="datetime-local" />
+            </h:inputText>
+            <h:message for="regdead" style="color: red; font-size: 12px;"/>
+            </div>
+                     
+                        <div style="margin-bottom: 15px;">
+                            <h:outputLabel for="amount" value="Event Amount" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+                            <h:inputText id="amount" 	required="true"		value="#{eventbean.payment}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;"/>
+                            <h:message for="amount" style="color: red; font-size: 12px;"/>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h:outputLabel for="imageFile" value="Event  Image" style="color: #0ef; display: block; margin-bottom: 5px;"/>
+                            <h:inputFile id="imageFile" 	required="true"	value="#{eventbean.imageFile}" style="width: 90%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; background-color: #2e2e2e; color: #fff;"/>
+                            <h:message for="imageFile" style="color: red; font-size: 12px;"/>
+                        </div>
+                      <div style="margin-bottom: 15px;">
+    <div style="text-align: left;">
+        <h:commandButton id="submit" value="Add Event" action="#{eventbean.addEvent()}" class="add-event-btn"/>
+    </div>
+</div>
+
+                    </h:form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</h:body>
+</html>

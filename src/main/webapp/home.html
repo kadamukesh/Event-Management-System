@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index Page</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+        }
+        .background {
+            background-image: url('images/home1.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); 
+        }
+        @keyframes slideUp {
+            0% {
+                background-position: center bottom;
+            }
+            100% {
+                background-position: center top;
+            }
+        }
+        .slideUp {
+            animation: slideUp 2s forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="background" onclick="animateAndRedirect()">
+        <div class="overlay"></div>
+    </div>
+
+    <script>
+        function animateAndRedirect() {
+            const background = document.querySelector('.background');
+            background.classList.add('slideUp');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000); 
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                animateAndRedirect();
+            }
+        });
+    </script>
+</body>
+</html>

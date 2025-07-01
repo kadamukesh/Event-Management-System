@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="facstyle.css" />
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js" nomodule="nomodule"></script>
+    <style>
+        .swiper {
+            width: 950px;
+        }
+
+        .container {
+            border-radius: 20px;
+        }
+
+        .card .image {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+        }
+
+        .card .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 40%;
+            border: 3px solid #000;
+        }
+
+        .card {
+            position: relative;
+            background: #000;
+            border: 3px solid #0ef;
+            border-radius: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #0ef;
+            clip-path: circle(55% at 0 0);
+            border-top-left-radius: 10px;
+            transition: clip-path 0.3s;
+        }
+
+        .card:hover::before {
+            clip-path: circle(75% at 0 0);
+        }
+
+        .card .card-content {
+            position: relative;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .card .social-media {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card .social-media i {
+            color: #fff;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .card .social-media i:hover {
+            color: #000;
+        }
+
+        .card .name-profession {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .name-profession .name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .name-profession .profession {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .card .rating {
+            display: flex;
+            align-items: center;
+            margin-top: 18px;
+        }
+
+        .card .rating i {
+            font-size: 18px;
+            color: #0ef;
+            margin: 0 2px;
+        }
+
+        .card .button {
+            display: flex;
+            justify-content: space-around;
+            width: 110%;
+            margin-top: 20px;
+        }
+
+        .card .button button {
+            background: #0ef;
+            border: none;
+            outline: none;
+            color: #000;
+            font-weight: 600;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .swiper-pagination-bullet {
+            height: 7px;
+            width: 26px;
+            background: #0ef;
+            border-radius: 25px;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #0ef;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form CSS with hover animations */
+        .feedback-form {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #000;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .feedback-form:hover {
+            box-shadow: 0 0 15px rgba(14, 239, 255, 0.8);
+        }
+
+        .feedback-form h2 {
+            text-align: center;
+            color: #0ef;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #0ef;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .feedback-form input[type="text"],
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #0ef;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #0ef;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feedback-form input[type="text"]:focus,
+        .feedback-form textarea:focus {
+            border-color: #00aaff;
+            background-color: #555;
+            color: #fff;
+            outline: none;
+        }
+
+        .feedback-form textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        .feedback-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0ef;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .feedback-form button:hover {
+            background-color: #00aaff;
+            transform: scale(1.05);
+        }
+         .placeholder-button {
+        position: relative;
+        background-color: #0ef;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .placeholder-button:hover {
+        background-color: #003366;
+        transform: scale(1.05);
+    }
+
+    .placeholder-button::before {
+        content: 'Submit';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: black;
+        font-size: 16px;
+        pointer-events: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="page-sidebar-wrapper">
+            <div class="sidebar">
+                <div class="logo">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <img src="./images/person-check.svg" alt="logo" class="logo-img mr-3" />
+                        <div class="logo-text">Student Module</div>
+                    </div>
+                </div>
+                <div class="user-info d-flex">
+                    <div>
+                        <img src="./images/man.svg" alt="user-img" class="user-img" />
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h:panelGroup rendered="#{student != null}">
+                            Welcome #{sbean.susername}
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{student == null}">
+                            Admin not logged in
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <ul class="nav flex-column menu-link">
+                    <li class="nav-item" style="margin-top: 50px;">
+                        <a href="stdevents.jsf" class="nav-link">
+                            <img src="./images/eye.svg" alt="orders" />View Events
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-top: 50px;">
+                        <a href="studenteventreg.jsf" class="nav-link">
+                            <img src="./images/person-add.svg" alt="customers" />Register for Events
+                        </a>
+                    </li>
+                           <li class="nav-item" style="margin-top: 50px;">
+                        <a href="#" class="nav-link">
+                            <img src="./images/cloud-download.svg" alt="settings" />Download Certificates
+                        </a>
+                    </li>
+                               <li class="nav-item" style="margin-top: 50px;">
+                        <a href="feedbackform.jsf" class="nav-link">
+                            <img src="./images/chat-dots-fill.svg" alt="dashboard" />Feedback
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-top: 50px;">
+                        <a href="stdhome0.jsp" class="nav-link">
+                            <img src="./images/person-square.svg" alt="dashboard" />Profile
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="top-bar d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <img src="./images/menu.svg" alt="menu" class="menu-toggle" />
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="icon-btn">
+                            <img src="./images/notification.svg" alt="notification" />
+                        </div>
+                        <a href="studentlogout.jsp">
+                            <div class="icon-btn">
+                                <img src="./images/logout.svg" alt="logout" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="inner-section">
+                    <h2 class="page-title" style="
+                        position: relative;
+                        display: inline-block;
+                        color: #0ef;
+                        transition: color 0.3s ease, transform 0.6s ease;
+                        cursor: pointer;
+                    " onmouseover="this.style.color='#003366'; this.style.transform='translateY(10px)';" onmouseout="this.style.color='#003366'; this.style.transform='translateY(0)';">
+                       FeedBaack After Event Participation</h2>
+                    <hr style="border: 1px solid #0ef; margin: 20px 0;" />
+
+                    <div class="feedback-form">
+                        <h2>Event Feedback</h2>
+                        <h:form>
+                            <div style="margin-bottom: 15px;">
+                                <label for="studentId">Student ID</label>
+                                <h:inputText id="studentId" value="#{feedbean.studentId}" required="true" />
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label for="eventId">Event ID</label>
+                                <h:inputText id="eventId" value="#{feedbean.eventId}" required="true" />
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label for="feedback">Your Feedback</label>
+                                <h:inputTextarea id="feedback" value="#{feedbean.feedback}" required="true" />
+                            </div>
+                          <button class="placeholder-button" type="submit">
+    <h:commandButton action="#{feedbean.addfeed()}" style="opacity: 0; width: 100%; height: 100%;" />
+</button>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
